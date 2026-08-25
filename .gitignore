@@ -1,0 +1,22 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+DumpStack.log
+inetpub/
+*.log
+*.tmp
+*.bak
+
+# Generator artifacts (not needed for the deployed site)
+*.json
+!package.json
+!package-lock.json
+
+# node / build (safety — none used here)
+node_modules/
+dist/
+build/
+.cache/
+
+# Backups from tooling
+*_backup_*/
