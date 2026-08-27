@@ -1,0 +1,22 @@
+# Never upload the .git directory (Cloudflare Workers 25 MiB per-file limit)
+**/.git
+.git
+.gitignore
+.assetsignore
+wrangler.jsonc
+wrangler.toml
+wrangler.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+DumpStack.log
+*.log
+*.tmp
+*.bak
+
+# node / build
+node_modules/
+dist/
+build/
+.cache/
