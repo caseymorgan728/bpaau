@@ -1,4 +1,4 @@
-# Never upload the .git directory (Cloudflare Workers 25 MiB per-file limit)
+﻿# Never upload the .git directory (Cloudflare Workers 25 MiB per-file limit)
 **/.git
 .git
 .gitignore
@@ -6,6 +6,7 @@
 wrangler.jsonc
 wrangler.toml
 wrangler.json
+_worker.js
 
 # OS / editor
 .DS_Store
