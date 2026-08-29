@@ -1,0 +1,22 @@
+{
+  "name": "BPAAU — Best Pokies Australia",
+  "short_name": "BPAAU",
+  "description": "Australia's independent pokies comparison site. Free chips, free spins no deposit, PayID casinos and high RTP pokies reviews. 18+.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0d10",
+  "theme_color": "#0b0d10",
+  "lang": "en-AU",
+  "icons": [
+    {
+      "src": "/assets/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}
