@@ -1,5 +1,14 @@
 # Cloudflare Pages headers — https://developers.cloudflare.com/pages/configuration/headers/
 
+# Global security headers applied to every response.
+/*
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: interest-cohort=()
+  X-XSS-Protection: 1; mode=block
+
 # Long-cache static assets (images, fonts, css). Filenames don't change so 30 days is safe;
 # bump the query string on assets/theme.css to force refresh when you edit CSS.
 /assets/*
