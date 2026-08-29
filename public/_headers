@@ -67,3 +67,7 @@
 
 /robots.txt
   Cache-Control: public, max-age=3600
+
+/llms.txt
+  Cache-Control: public, max-age=3600
+  Content-Type: text/markdown; charset=utf-8
