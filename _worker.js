@@ -1,9 +1,10 @@
 // bpaau.org Worker entrypoint.
 // - Enforces HTTPS
 // - Redirects www -> apex
-// - Redirects .html URLs to clean URLs (301)
-// - Internally rewrites clean URLs to .html for static asset serving
+// - Redirects .html URLs to clean URLs (301, SEO-friendly)
+// - Normalises trailing slashes
 // - Serves static assets from ./public via the ASSETS binding
+//   (ASSETS natively serves clean URLs: /about -> about.html)
 
 // Files that must remain accessible at their .html URL (e.g. search-engine verification).
 const VERIFICATION_FILES = new Set([
@@ -33,7 +34,7 @@ export default {
       return env.ASSETS.fetch(request);
     }
 
-    // 4. Redirect .html URLs to their clean equivalent.
+    // 4. Redirect .html URLs to their clean equivalent (301 for SEO).
     if (path.endsWith(".html")) {
       let clean = path.slice(0, -5); // strip ".html"
       if (clean === "/index") clean = "/";
@@ -47,20 +48,21 @@ export default {
       return Response.redirect(url.toString(), 301);
     }
 
-    // 6. Internally rewrite clean URLs to .html for the static asset handler.
-    //    Paths with a file extension (e.g. .css, .png, .webp, .txt, .xml) pass through.
-    let assetPath = path;
-    if (path === "/" || path === "") {
-      assetPath = "/index.html";
-    } else if (!path.includes(".")) {
-      assetPath = path + ".html";
+    // 6. Serve from ASSETS. Clean URLs (/about) are natively resolved to
+    //    about.html by the ASSETS binding — no manual rewrite needed.
+    //    If a clean URL 404s, fall back to trying the .html file directly.
+    let response = await env.ASSETS.fetch(request);
+
+    if (response.status === 404 && !path.includes(".") && path !== "/") {
+      const htmlUrl = new URL(request.url);
+      htmlUrl.pathname = path + ".html";
+      const htmlRequest = new Request(htmlUrl.toString(), request);
+      const htmlResponse = await env.ASSETS.fetch(htmlRequest);
+      if (htmlResponse.status !== 404) {
+        response = htmlResponse;
+      }
     }
 
-    // Build a new request pointing at the asset path, preserving method + headers.
-    const assetUrl = new URL(request.url);
-    assetUrl.pathname = assetPath;
-    const assetRequest = new Request(assetUrl.toString(), request);
-
-    return env.ASSETS.fetch(assetRequest);
+    return response;
   },
 };
