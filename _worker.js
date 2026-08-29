@@ -63,6 +63,62 @@ export default {
       }
     }
 
-    return response;
+    // 7. Post-process response: add SEO/security headers that ASSETS doesn't set.
+    return addResponseHeaders(response, path);
   },
 };
+
+// Add security + SEO headers. Cloudflare Workers' ASSETS binding doesn't
+// consistently apply _headers, so we set them here on every response.
+function addResponseHeaders(response, path) {
+  const h = new Headers(response.headers);
+  const ct = h.get("content-type") || "";
+
+  // Always-on security headers
+  if (!h.has("strict-transport-security"))
+    h.set("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
+  if (!h.has("x-content-type-options"))
+    h.set("X-Content-Type-Options", "nosniff");
+  if (!h.has("referrer-policy"))
+    h.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  if (!h.has("permissions-policy"))
+    h.set("Permissions-Policy", "interest-cohort=(), browsing-topics=()");
+  if (!h.has("x-frame-options"))
+    h.set("X-Frame-Options", "SAMEORIGIN");
+
+  // Content Security Policy: safe defaults for a static content site.
+  // Inline styles/scripts are used in this codebase (theme + tiny inline JS),
+  // and Google Fonts is the only external asset host, so allow those.
+  if (!h.has("content-security-policy") && ct.includes("text/html")) {
+    h.set(
+      "Content-Security-Policy",
+      "default-src 'self'; " +
+      "script-src 'self' 'unsafe-inline'; " +
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+      "font-src 'self' https://fonts.gstatic.com data:; " +
+      "img-src 'self' data: https:; " +
+      "connect-src 'self'; " +
+      "frame-ancestors 'self'; " +
+      "base-uri 'self'; " +
+      "form-action 'self'; " +
+      "upgrade-insecure-requests"
+    );
+  }
+
+  // Add charset to HTML Content-Type if missing
+  if (ct.startsWith("text/html") && !ct.toLowerCase().includes("charset")) {
+    h.set("Content-Type", "text/html; charset=utf-8");
+  }
+
+  // Cache-Control for HTML: short cache with stale-while-revalidate.
+  // ASSETS' default is often max-age=0 for HTML; override so repeat visits are fast.
+  if (ct.includes("text/html") && response.status === 200) {
+    h.set("Cache-Control", "public, max-age=600, stale-while-revalidate=86400");
+  }
+
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers: h,
+  });
+}
