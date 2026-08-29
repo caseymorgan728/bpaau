@@ -44,6 +44,14 @@
 - [Top Pokies](https://bpaau.org/blog-top-pokies.html)
 - [Winning Tips](https://bpaau.org/blog-winning-tips.html)
 
+## About and legal
+
+- [About BPAAU](https://bpaau.org/about.html) — editorial standards, review methodology, and how we choose operators
+- [Contact](https://bpaau.org/contact.html) — editorial, complaints, partnerships
+- [Responsible Gambling](https://bpaau.org/responsible-gambling.html) — free 24/7 help for Australian players
+- [Privacy Policy](https://bpaau.org/privacy.html)
+- [Terms of Use](https://bpaau.org/terms.html)
+
 ## Machine-readable
 
 - [Sitemap](https://bpaau.org/sitemap.xml)
