@@ -1,0 +1,69 @@
+# Cloudflare Pages headers — https://developers.cloudflare.com/pages/configuration/headers/
+
+# Long-cache static assets (images, fonts, css). Filenames don't change so 30 days is safe;
+# bump the query string on assets/theme.css to force refresh when you edit CSS.
+/assets/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+  X-Content-Type-Options: nosniff
+
+/banners%20home/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+
+/banners home/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+
+/blog%20banner/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+
+/blog banner/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+
+/blog%20logo/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+
+/blog logo/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+
+/popout%20banner/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+
+/popout banner/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+
+/popout%20vertical/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+
+/popout vertical/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+
+/logo%20app/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+
+/logo app/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+
+# Root favicon files
+/favicon.ico
+  Cache-Control: public, max-age=604800
+
+/favicon.png
+  Cache-Control: public, max-age=604800
+
+/logo.png
+  Cache-Control: public, max-age=2592000
+
+# HTML: short cache + revalidation so edits go live quickly
+/*.html
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: interest-cohort=()
+
+# Sitemap & robots — fresh
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+  Content-Type: application/xml; charset=utf-8
+  X-Robots-Tag: noindex
+
+/robots.txt
+  Cache-Control: public, max-age=3600

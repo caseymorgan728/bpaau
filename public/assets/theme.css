@@ -1,5 +1,5 @@
 /* Agent 1 · warm vibrant casino · hue=110° · tone=warm · radius=generous · shadow=soft */
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@700&family=Rubik:wght@400;650;700&display=swap');
+/* Fonts loaded via <link rel="preconnect"> + <link rel="stylesheet"> in HTML head (non-blocking, faster than @import) */
 
 :root {
   --accent-h: 110;
