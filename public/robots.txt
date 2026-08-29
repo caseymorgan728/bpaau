@@ -1,4 +1,30 @@
+# robots.txt for https://bpaau.org/
+# Best Pokies Australia (BPAAU) — allow all indexing
+
 User-agent: *
+Allow: /
+Disallow: /_worker.js
+Disallow: /*.json$
+
+# Media-friendly bots
+User-agent: Googlebot-Image
+Allow: /assets/
+Allow: /banners%20home/
+Allow: /blog%20banner/
+Allow: /blog%20logo/
+Allow: /popout%20banner/
+Allow: /popout%20vertical/
+Allow: /logo%20app/
+
+# AI/preview crawlers — allow discovery
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
 Allow: /
 
 Sitemap: https://bpaau.org/sitemap.xml
+Host: https://bpaau.org
