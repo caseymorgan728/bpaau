@@ -945,3 +945,29 @@ img, svg, video, iframe { max-width: 100%; height: auto; }
   .blog-nav { display: grid !important; grid-template-columns: repeat(3, 1fr); gap: 8px; justify-content: stretch; padding: 8px 4px; }
   .blog-nav a { text-align: center; font-size: 12px; padding: 8px 4px; white-space: nowrap; }
 }
+
+/* ── Compliance & responsible-gambling notices (2026 E-E-A-T pass) ── */
+.rg-banner{
+  margin:14px 0 4px; padding:12px 16px;
+  border:1px solid rgba(224,72,63,.35); border-left:4px solid #e0483f;
+  border-radius:10px; background:rgba(224,72,63,.08);
+  color:var(--ink,#e6ebf2); font-size:13.5px; line-height:1.6;
+}
+.rg-banner strong{ color:#ff6b60; }
+.rg-banner a{ color:var(--accent,#16a34a); text-decoration:underline; }
+.footer-note--rg{ margin-top:14px; }
+.footer-note--reg{ margin-top:10px; font-size:12px; line-height:1.65; opacity:.82; }
+.snippet-answer{
+  margin:16px 0 22px; padding:16px 18px;
+  border:1px solid var(--border,rgba(255,255,255,.12)); border-left:4px solid var(--accent,#16a34a);
+  border-radius:12px; background:rgba(22,163,74,.06); line-height:1.7;
+}
+.snippet-answer .snippet-q{ display:block; font-weight:700; margin-bottom:6px; color:var(--ink,#e6ebf2); }
+.bank-matrix-wrap{ overflow-x:auto; margin:18px 0; -webkit-overflow-scrolling:touch; }
+.bank-matrix{ width:100%; border-collapse:collapse; min-width:720px; font-size:14px; }
+.bank-matrix caption{ text-align:left; font-size:12px; opacity:.7; padding:0 0 8px; }
+.bank-matrix th, .bank-matrix td{
+  border:1px solid var(--border,rgba(255,255,255,.12)); padding:10px 12px; text-align:left; vertical-align:top;
+}
+.bank-matrix thead th{ background:rgba(255,255,255,.05); font-weight:700; }
+.bank-matrix tbody th{ background:rgba(255,255,255,.03); white-space:nowrap; }
