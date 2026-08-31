@@ -5,6 +5,12 @@ User-agent: *
 Allow: /
 Disallow: /_worker.js
 Disallow: /*.json$
+# Repo/config artifacts served from the assets dir — no index value.
+Disallow: /README.md
+Disallow: /_headers
+Disallow: /user_nav.png
+# NOTE: legacy URLs migrated in redirects.json are deliberately NOT disallowed.
+# Googlebot must be able to crawl them to see the 301 and pass equity through.
 
 # Media-friendly bots
 User-agent: Googlebot-Image
