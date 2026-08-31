@@ -10,6 +10,10 @@
     "directory": "./public",
     "binding": "ASSETS",
     "not_found_handling": "404-page",
+    // Serve blog/index.html at /blog with no trailing slash. Must stay
+    // "drop-trailing-slash" so ASSETS never 301s /blog -> /blog/, which the
+    // worker's trailing-slash normaliser would bounce straight back (loop).
+    "html_handling": "drop-trailing-slash",
     "run_worker_first": true
   }
 }

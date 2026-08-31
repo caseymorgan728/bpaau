@@ -11,6 +11,9 @@ inetpub/
 *.json
 !package.json
 !package-lock.json
+# Runtime config — imported by _worker.js at build time, MUST be committed
+# or the worker bundle fails to build.
+!redirects.json
 
 # node / build (safety — none used here)
 node_modules/

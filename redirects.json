@@ -1,0 +1,18 @@
+{
+  "_comment": "301 redirect map for bpaau.org. Consumed at runtime by _worker.js, which imports this file and issues a permanent redirect on any exact path match. Keys and values are root-relative, no trailing slash (the worker normalises trailing slashes before lookup). Never delete an entry once it ships - old URLs stay indexed for a long time and removing a row turns a working 301 into a 404.",
+  "_generated": "2026-08-31",
+  "redirects": {
+    "/ausmegaways44": "/ausmegaways-review",
+    "/bestrtp44-aus": "/bestrtp-review",
+    "/freecredit777-aus": "/freecredit777-review",
+    "/lockrespin88": "/lockrespin-review",
+    "/megawin33-au": "/megawin33-review",
+    "/nodepspin22": "/nodepspin-review",
+    "/payid-withdraw44": "/payid-withdraw-review",
+    "/blog-bonus-guides": "/blog/bonus-guides",
+    "/blog-fast-cashouts": "/blog/fast-cashouts",
+    "/blog-promo-guides": "/blog/promo-guides",
+    "/blog-top-pokies": "/blog/top-pokies",
+    "/blog-winning-tips": "/blog/winning-tips"
+  }
+}

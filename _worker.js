@@ -3,8 +3,15 @@
 // - Redirects www -> apex
 // - Redirects .html URLs to clean URLs (301, SEO-friendly)
 // - Normalises trailing slashes
+// - Applies the 301 redirect map from redirects.json (legacy URL migrations)
 // - Serves static assets from ./public via the ASSETS binding
 //   (ASSETS natively serves clean URLs: /about -> about.html)
+
+import redirectConfig from "./redirects.json";
+
+// Legacy path -> current path. Bundled at build time by wrangler.
+// Edit redirects.json (not this file) to add a migration.
+const REDIRECT_MAP = (redirectConfig && redirectConfig.redirects) || {};
 
 // Files that must remain accessible at their .html URL (e.g. search-engine verification).
 const VERIFICATION_FILES = new Set([
@@ -48,7 +55,16 @@ export default {
       return Response.redirect(url.toString(), 301);
     }
 
-    // 6. Serve from ASSETS. Clean URLs (/about) are natively resolved to
+    // 6. Apply the legacy 301 redirect map. Runs after .html stripping and
+    //    trailing-slash normalisation so every lookup sees a canonical clean
+    //    path. Preserves query strings and hashes are client-side anyway.
+    const redirectTarget = REDIRECT_MAP[url.pathname];
+    if (redirectTarget) {
+      url.pathname = redirectTarget;
+      return Response.redirect(url.toString(), 301);
+    }
+
+    // 7. Serve from ASSETS. Clean URLs (/about) are natively resolved to
     //    about.html by the ASSETS binding — no manual rewrite needed.
     //    If a clean URL 404s, fall back to trying the .html file directly.
     let response = await env.ASSETS.fetch(request);
@@ -63,7 +79,7 @@ export default {
       }
     }
 
-    // 7. Post-process response: add SEO/security headers that ASSETS doesn't set.
+    // 8. Post-process response: add SEO/security headers that ASSETS doesn't set.
     return addResponseHeaders(response, path);
   },
 };
