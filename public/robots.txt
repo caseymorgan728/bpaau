@@ -12,15 +12,17 @@ Disallow: /user_nav.png
 # NOTE: legacy URLs migrated in redirects.json are deliberately NOT disallowed.
 # Googlebot must be able to crawl them to see the 301 and pass equity through.
 
-# Media-friendly bots
+# Media-friendly bots. This group does NOT inherit the User-agent: * rules,
+# so the dev screenshot has to be excluded again here or it stays crawlable
+# for image search.
 User-agent: Googlebot-Image
 Allow: /assets/
 Allow: /banners%20home/
 Allow: /blog%20banner/
-Allow: /blog%20logo/
 Allow: /popout%20banner/
 Allow: /popout%20vertical/
 Allow: /logo%20app/
+Disallow: /user_nav.png
 
 # AI/preview crawlers — allow discovery
 User-agent: GPTBot
